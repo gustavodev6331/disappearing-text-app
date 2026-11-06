@@ -17,7 +17,7 @@ entry = Entry()
 entry.pack()
 
 #Result
-result_label = Label(window, text="Start typing to begin", fg="white", bg="black")
+result_label = Label(window, text="Start typing.", fg="white", bg="black")
 result_label.pack()
 
 
