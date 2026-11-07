@@ -38,9 +38,10 @@ def check_timer():
             entry.config(state="normal")
             entry.delete(0, END)
             result_label.config(text=f"Start typing to begin the test")
+            start_time = None
 
     window.after(100, check_timer)
-    window.mainloop()
+
 
 
 
@@ -48,6 +49,6 @@ def check_timer():
 entry.bind("<Key>", start_text)
 
 
-
+window.after(100, check_timer)
 window.mainloop()
 
