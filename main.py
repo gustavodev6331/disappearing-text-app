@@ -9,15 +9,19 @@ window.title("Disappearing text application")
 window.minsize(width=700, height=500)
 
 #Label
-title_label = Label(window, text="Disappearing text application", fg="white", bg="black")
+title_label = Label(window, text="Dangerous text application", fg="white", bg="black")
 title_label.pack()
 
+#count_down
+count_label = Label(window, text="10 seconds", fg="red", bg="black")
+count_label.pack()
+
 #Entry
-entry = Entry()
-entry.pack()
+text = Text()
+text.pack()
 
 #Result
-result_label = Label(window, text="Start typing.", fg="white", bg="black")
+result_label = Label(window, text="Keep writing. Don't stop for over than 10 seconds!", fg="white", bg="black")
 result_label.pack()
 
 
@@ -33,12 +37,17 @@ def check_timer():
     if start_time is not None:
 
         elapsed_time = time.time() - start_time
+        remaining_time = DISAPPEARING_TIMER - elapsed_time
+        count_label.config(text=f"{int(remaining_time)} seconds")
+        result_label.config(text=f"Keep writing. Don't stop for over than 10 seconds!")
 
         if elapsed_time >= DISAPPEARING_TIMER:
-            entry.config(state="normal")
-            entry.delete(0, END)
-            result_label.config(text=f"Start typing to begin the test")
+            text.config(state="normal")
+            text.delete("1.0", END)
+            result_label.config(text=f"Start typing to re-start the test")
             start_time = None
+            count_label.config(text="Time over")
+
 
     window.after(100, check_timer)
 
@@ -46,7 +55,7 @@ def check_timer():
 
 
 
-entry.bind("<Key>", start_text)
+text.bind("<Key>", start_text)
 
 
 window.after(100, check_timer)
